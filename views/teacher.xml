@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--form view for teachers-->
+    <record id="school_teacher_form_view" model="ir.ui.view">
+        <field name="name">school.teacher.form</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form string="Teacher">
+                <header>
+                    <button name="action_select" string="SENIOR" type="object" class="oe_highlight"
+                            title="Mark as Selected" invisible="seniority=='senior'"/>
+                    <field name="seniority" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="address"/>
+                            <field name="mob_num"/>
+                            <field name="dob"/>
+                            <field name="class_teacher"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!--    tree view for teachers-->
+    <record id="school_teacher_tree_view" model="ir.ui.view">
+        <field name="name">school.teacher.tree</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="address"/>
+                <field name="mob_num"/>
+                <field name="dob"/>
+                <field name="class_teacher"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    calendar view for teachers-->
+    <record id="school_teacher_calendar_view" model="ir.ui.view">
+        <field name="name">school.teacher.calendar</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <calendar string="Teacher details" create="0" mode="month" date_start="dob" event_limit="5"
+                      quick_create="0">
+                <field name="name" avatar_field="avatar_128" options="{'icon': 'fa fa-users'}"/>
+            </calendar>
+        </field>
+    </record>
+
+
+    <record id="action_teacher" model="ir.actions.act_window">
+        <field name="name">Teacher Records</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.teacher</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+
+    <menuitem id="school_teacher_menu" parent="school_menu"
+              name="Teacher" action="action_teacher" sequence="6"/>
+
+
+</odoo>
