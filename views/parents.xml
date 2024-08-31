@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--form view for parents-->
+    <record id="school_parents_form_view" model="ir.ui.view">
+        <field name="name">school.parents.form</field>
+        <field name="model">school.parents</field>
+        <field name="arch" type="xml">
+            <form string="Parents">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="mobile_num"/>
+                            <field name="dob"/>
+                            <field name="age"/>
+                            <field name="child_id"/>
+                            <field name="child_class"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+    <!--    tree view for parents-->
+    <record id="school_parents_tree_view" model="ir.ui.view">
+        <field name="name">school.parents.tree</field>
+        <field name="model">school.parents</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="mobile_num"/>
+                <field name="dob"/>
+                <field name="age"/>
+                <field name="child_id"/>
+                <field name="child_class"/>
+            </tree>
+        </field>
+    </record>
+    
+    
+    <!--    actions for parents-->
+    <record id="action_parents" model="ir.actions.act_window">
+        <field name="name">Parents Records</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.parents</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--parents menu-->
+    <menuitem id="school_parents_menu" parent="school_menu"
+              name="Parents" action="action_parents" sequence="8"/>
+
+</odoo>

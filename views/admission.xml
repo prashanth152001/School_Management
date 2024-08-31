@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--form view for admissions-->
+    <record id="school_admission_form_view" model="ir.ui.view">
+        <field name="name">school.admission.form</field>
+        <field name="model">school.admission</field>
+        <field name="arch" type="xml">
+            <form string="Admission">
+                <header>
+                    <button name="student_creation" string="TAKE ADMISSION"
+                            type="object" class="oe_highlight" title="Mark as Admitted"
+                            invisible="admission_status == 'admitted'" create="1"/>
+                    <field name="admission_status" widget="statusbar"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="dob"/>
+                            <field name="parent"/>
+                            <field name="parent_num"/>
+                            <field name="standard"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    tree view for admissions-->
+    <record id="school_admission_tree_view" model="ir.ui.view">
+        <field name="name">school.admission.tree</field>
+        <field name="model">school.admission</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="dob"/>
+                <field name="parent"/>
+                <field name="parent_num"/>
+                <field name="standard"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    actions for admission-->
+    <record id="action_admission" model="ir.actions.act_window">
+        <field name="name">Admission Records</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.admission</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--admission menu-->
+    <menuitem id="school_menu" name="School"/>
+    <menuitem id="school_admission_menu" parent="school_menu"
+              name="Admission" action="action_admission" sequence="8"/>
+
+
+</odoo>

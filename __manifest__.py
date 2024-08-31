@@ -5,12 +5,20 @@
 {
     'name': 'School_management',
     'author': 'prashanth',
+    'version': '17.0.0.0',
+    'license': 'LGPL-3',
 
     'data': ['security/ir.model.access.csv',
             'views/student.xml',
              'views/teacher.xml',
+             'views/parents.xml',
+             'views/admission.xml',
              ],
-    'depends': ['mail',],
+
+    'depends': ['mail',
+                ],
+
     'installable': True,
     'application': True,
+    'auto_install': False,
 }
