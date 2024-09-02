@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--form view-->
+    <record id="view_sale_order_form_customer_note" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.customer.note</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="customer_note"/>
+            </xpath>
+
+            <xpath expr="//field[@name='require_signature']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    tree view-->
+    <record id="view_sale_order_tree_customer_note" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.customer.note</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="customer_note"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

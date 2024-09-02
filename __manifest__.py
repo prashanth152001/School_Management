@@ -13,9 +13,11 @@
              'views/teacher.xml',
              'views/parents.xml',
              'views/admission.xml',
+             'views/sale.xml',
              ],
 
     'depends': ['mail',
+                'sale',
                 ],
 
     'installable': True,
