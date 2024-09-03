@@ -7,6 +7,10 @@
         <field name="arch" type="xml">
             <form string="Student">
                 <header>
+                    <button name="student_complaint_creation_button" string="Complaint"
+                            type="object" class="oe_highlight"/>
+<!--                    <button name="%(action_student_complaint)d" string="Complaint"-->
+<!--                            type="action" class="oe_highlight"/>-->
                     <button name="action_select" string="ADMIT"
                             type="object" class="oe_highlight" title="Mark as Admitted"
                             invisible="select_status == 'admitted'"/>

@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class StudentDetails(models.Model):
@@ -22,6 +22,16 @@ class StudentDetails(models.Model):
     fees_structure_ids = fields.One2many(comodel_name='school.fees.structure', inverse_name='student_id',
                                          string='Fees Structure')
 
+    # student complaint wizard
+    def student_complaint_creation_button(self):
+        return {
+            'name': _('Complaint'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'student.complaint.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
     def action_select(self):
         self.select_status = 'admitted'
 
@@ -29,5 +39,6 @@ class StudentDetails(models.Model):
     def _onchange_teacher_id(self):
         if self.teacher_id:
             self.teacher_mob_num = self.teacher_id.mob_num
+
 
 

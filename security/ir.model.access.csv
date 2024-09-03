@@ -4,3 +4,4 @@ access_school_teacher,school.teacher,model_school_teacher,,1,1,1,1
 access_school_fees_structure,school.fees.structure,model_school_fees_structure,,1,1,1,1
 access_school_parents,school.parents,model_school_parents,,1,1,1,1
 access_school_admission,school.admission,model_school_admission,,1,1,1,1
+access_student_complaint_wizard,student.complaint.wizard,model_student_complaint_wizard,,1,1,1,1

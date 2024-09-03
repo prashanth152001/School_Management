@@ -9,6 +9,7 @@
     'license': 'LGPL-3',
 
     'data': ['security/ir.model.access.csv',
+             'wizard/student_complaint_view.xml',
             'views/student.xml',
              'views/teacher.xml',
              'views/parents.xml',
