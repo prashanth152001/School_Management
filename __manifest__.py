@@ -14,10 +14,12 @@
              'views/parents.xml',
              'views/admission.xml',
              'views/sale.xml',
+             'views/invoice.xml',
              ],
 
     'depends': ['mail',
                 'sale',
+                'account',
                 ],
 
     'installable': True,

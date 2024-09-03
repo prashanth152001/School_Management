@@ -1,6 +1,8 @@
 from email.policy import default
 
 from odoo import models, fields
+from odoo.exceptions import ValidationError
+
 
 class TeacherDetails(models.Model):
     _name = 'school.teacher'
@@ -17,3 +19,9 @@ class TeacherDetails(models.Model):
 
     def action_select(self):
         self.seniority = 'senior'
+
+    # def create(self, vals):
+    #     print(vals)
+    #     teacher_ids = self.env['school.teacher'].search([('name', '=', vals.)])
+    #     print(teacher_ids, "teacher ids")
+
