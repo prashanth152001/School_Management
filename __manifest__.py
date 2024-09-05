@@ -9,6 +9,7 @@
     'license': 'LGPL-3',
 
     'data': ['security/ir.model.access.csv',
+             'security/school_security.xml',
              'wizard/student_complaint_view.xml',
             'views/student.xml',
              'views/teacher.xml',
@@ -16,6 +17,7 @@
              'views/admission.xml',
              'views/sale.xml',
              'views/invoice.xml',
+             'views/student_complaint.xml',
              ],
 
     'depends': ['mail',

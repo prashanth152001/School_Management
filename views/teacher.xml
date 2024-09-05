@@ -7,20 +7,30 @@
         <field name="arch" type="xml">
             <form string="Teacher">
                 <header>
-                    <button name="action_select" string="SENIOR" type="object" class="oe_highlight"
-                            title="Mark as Selected" invisible="seniority=='senior'"/>
-                    <field name="seniority" widget="statusbar"/>
+                    <button name="action_teacher_user_creation" string="JOINED" type="object" class="oe_highlight"
+                            title="Mark as Joined" invisible="joining_status=='Joined'"/>
+                    <field name="joining_status" widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="name"/>
+                            <field name="email"/>
                             <field name="address"/>
+                        </group>
+                        <group>
                             <field name="mob_num"/>
                             <field name="dob"/>
                             <field name="class_teacher"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page name="additional_info" string="Additional Info">
+                            <group>
+                                <field name="user_id" domain="[('name', '=', name)]"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" options="{'open_attachments': True}"/>
@@ -38,6 +48,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="email"/>
                 <field name="address"/>
                 <field name="mob_num"/>
                 <field name="dob"/>

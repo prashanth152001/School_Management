@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="student_complaint_wizard_form" model="ir.ui.view">
+    <record id="student_complaint_wizard_form_view" model="ir.ui.view">
         <field name="name">student.complaint.wizard.form</field>
         <field name="model">student.complaint.wizard</field>
         <field name="arch" type="xml">
@@ -13,32 +13,13 @@
                         <field name="suggestions"/>
                     </group>
                 </sheet>
+                <footer>
+                    <button string="Complaint" name="student_complaint_button"
+                            type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
             </form>
         </field>
     </record>
-
-    <record id="student_complaint_wizard_tree" model="ir.ui.view">
-        <field name="name">student.complaint.wizard.tree</field>
-        <field name="model">student.complaint.wizard</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name_id"/>
-                <field name="student_class"/>
-                <field name="suggestions"/>
-            </tree>
-        </field>
-    </record>
-
-    <!--    actions for student complaints-->
-    <record id="action_student_complaint" model="ir.actions.act_window">
-        <field name="name">Student Complaints</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">student.complaint.wizard</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <!--    complaint menu-->
-    <menuitem id="student_complaint_menu" parent="school_menu"
-              name="Complaints" action="action_student_complaint" sequence="20"/>
 
 </odoo>
