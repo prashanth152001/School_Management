@@ -8,8 +8,8 @@
     'version': '17.0.0.0',
     'license': 'LGPL-3',
 
-    'data': ['security/ir.model.access.csv',
-             'security/school_security.xml',
+    'data': ['security/school_security.xml',
+             'security/ir.model.access.csv',
              'wizard/student_complaint_view.xml',
             'views/student.xml',
              'views/teacher.xml',
