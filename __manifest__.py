@@ -10,8 +10,9 @@
 
     'data': ['security/school_security.xml',
              'security/ir.model.access.csv',
+             'data/mail_template_student.xml',
              'wizard/student_complaint_view.xml',
-            'views/student.xml',
+             'views/student.xml',
              'views/teacher.xml',
              'views/parents.xml',
              'views/admission.xml',

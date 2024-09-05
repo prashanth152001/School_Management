@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="mail_template_student_creation" model="mail.template">
+            <field name="name">Student Registration</field>
+            <field name="model_id" ref="school.model_school_student"/>
+            <field name="subject">New Student Registration</field>
+            <field name="partner_to">{{ object.user_id.login }}</field>
+            <field name="email_to">prashanthpolusani@gmail.com</field>
+            <field name="description">Sent to Management on student registration</field>
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0"
+                       style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                   style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <!-- HEADER -->
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                   style="background-color: white; padding: 0; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <span style="font-size: 20px; font-weight: bold;">
+                                                            New Student Registration
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- CONTENT -->
+                                    <tr>
+                                        <td style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 13px;">
+                                                        <div>
+                                                            Respected Administrator,
+                                                            <br/>
+                                                            <br/>
+                                                            I am <t t-out="object.name or ''"/> from <t t-out="object.address or ''"/>.
+                                                            My father name is <t t-out="object.guardian or ''"/> and
+                                                            his mobile number is +91-<t t-out="object.guardian_num or ''"/>.
+                                                            I have joined in <t t-out="object.standard or ''"/> class
+                                                            <t t-out="object.section or ''"/> section.
+                                                            <br/>
+                                                            I am glad to join your school!
+                                                            <br/>
+                                                            <br/>
+                                                            Yours sincerely,
+                                                            <br/>
+                                                            <t t-if="object.name">
+                                                                <b>
+                                                                    <t t-out="object.name or ''"/>
+                                                                </b>
+                                                                <br/>Email:
+                                                                <t t-out="object.user_id.email or ''"/>
+                                                                <br/>Date of Joining:
+                                                                <t t-out="object.doj or ''"/>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <t t-out="object.user_id.name or ''"/>
+                                                            </t>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
