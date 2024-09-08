@@ -8,11 +8,13 @@
         <field name="arch" type="xml">
             <form string="Student">
                 <header>
-                    <button name="student_complaint_creation_button" string="Complaint"
-                            type="object" class="oe_highlight"/>
                     <button name="action_student_admit" string="ADMIT"
                             type="object" class="oe_highlight" title="Mark as Admitted"
                             invisible="select_status == 'admitted'"/>
+                    <button name="student_complaint_creation_button" string="Complaint"
+                            type="object" class="oe_highlight"/>
+                    <button name="action_student_email_button" string="Send Email"
+                            type="object" class="oe_highlight"/>
                     <field name="select_status" widget="statusbar"/>
                 </header>
 
@@ -66,7 +68,7 @@
                             <form>
                             <sheet>
                                 <group>
-                                    <field name="user_id" domain="[('name', '=', name)]"/>
+                                    <field name="user_id"/>
                                 </group>
                             </sheet>
                             </form>

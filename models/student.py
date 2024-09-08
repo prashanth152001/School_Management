@@ -63,6 +63,12 @@ class StudentDetails(models.Model):
             'groups_id': [(6, 0, [self.env.ref('school.group_school_student').id])],
             'password': 'student',
         })
+        self.user_id = student_user.id
+
+    # student email button action
+    def action_student_email_button(self):
+        template = self.env.ref('school.mail_template_student_creation')
+        template.send_mail(self.user_id)
 
     # automatically fetching teacher mobile no. when a teacher is selected
     @api.onchange('teacher_id')

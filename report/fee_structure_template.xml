@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_student_fee_structure">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Student Details -->
+                        <h2 class="text-center">Student Details</h2>
+                        <table class="table table-bordered table-hover table-sm">
+                            <tbody>
+                                <tr>
+                                    <th>Name:</th>
+                                    <td><t t-esc="doc.name"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Class:</th>
+                                    <td><t t-esc="doc.standard"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Section:</th>
+                                    <td><t t-esc="doc.section"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Father's Name:</th>
+                                    <td><t t-esc="doc.guardian"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td><t t-esc="doc.email_address"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br/><br/>
+
+                        <!-- Fee Structure Details -->
+                        <h3 class="text-center">Fee Structure</h3>
+                        <table class="table table-bordered table-hover table-sm mt-3">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Fee Description</th>
+                                    <th>Amount (INR)</th>
+                                    <th>Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="total_fee" t-value="0"/>
+                                <tr t-foreach="doc.fees_structure_ids" t-as="line">
+                                    <t t-set="total_fee" t-value="total_fee + line.amount"/>
+                                    <td t-esc="line.name"/>
+                                    <td class="text-right"><t t-esc="line.amount"/></td>
+                                    <td><t t-esc="line.due_date" t-options='{"widget": "date"}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br/>
+
+                        <!-- Total Amount -->
+                        <p class="text-right">
+                            <strong>Total Fees: </strong>
+                            <span class="text-danger"><t t-esc="total_fee"/></span> INR
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -19,6 +19,8 @@
              'views/sale.xml',
              'views/invoice.xml',
              'views/student_complaint.xml',
+             'report/fee_structure_template.xml',
+             'report/fee_structure_report.xml',
              ],
 
     'depends': ['mail',

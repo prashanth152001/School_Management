@@ -25,6 +25,7 @@ class TeacherDetails(models.Model):
             'groups_id': [(6, 0, [self.env.ref('school.group_school_teacher').id])],
             'password': 'teacher',
         })
+        self.user_id = teacher_user.id
 
 
 
