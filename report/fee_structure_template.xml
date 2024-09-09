@@ -11,28 +11,39 @@
                             <tbody>
                                 <tr>
                                     <th>Name:</th>
-                                    <td><t t-esc="doc.name"/></td>
+                                    <td>
+                                        <t t-esc="doc.name"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Class:</th>
-                                    <td><t t-esc="doc.standard"/></td>
+                                    <td>
+                                        <t t-esc="doc.standard"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Section:</th>
-                                    <td><t t-esc="doc.section"/></td>
+                                    <td>
+                                        <t t-esc="doc.section"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Father's Name:</th>
-                                    <td><t t-esc="doc.guardian"/></td>
+                                    <td>
+                                        <t t-esc="doc.guardian"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Email:</th>
-                                    <td><t t-esc="doc.email_address"/></td>
+                                    <td>
+                                        <t t-esc="doc.email_address"/>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <br/><br/>
+                        <br/>
+                        <br/>
 
                         <!-- Fee Structure Details -->
                         <h3 class="text-center">Fee Structure</h3>
@@ -40,27 +51,60 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Fee Description</th>
-                                    <th>Amount (INR)</th>
                                     <th>Due Date</th>
+                                    <th>Untaxed Amount (INR)</th>
+                                    <th>Tax</th>
+                                    <th>Taxed Amount (INR)</th>
+                                    <th>Total Amount (INR)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-set="total_fee" t-value="0"/>
                                 <tr t-foreach="doc.fees_structure_ids" t-as="line">
-                                    <t t-set="total_fee" t-value="total_fee + line.amount"/>
                                     <td t-esc="line.name"/>
-                                    <td class="text-right"><t t-esc="line.amount"/></td>
-                                    <td><t t-esc="line.due_date" t-options='{"widget": "date"}'/></td>
+                                    <td>
+                                        <t t-esc="line.due_date" t-options='{"widget": "date"}'/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="line.amount"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.tax_ids"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="line.tax_amount"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-esc="line.total_amount"/>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <br/>
 
+                        <!-- Total Untaxed Amount -->
+                        <p class="text-right">
+                            <strong>Untaxed Amount:</strong>
+                            <span class="text-danger">
+                                <t t-esc="doc.untaxed_amount"/>
+                            </span>
+                            INR
+                        </p>
+                        <!-- Total Taxed Amount -->
+                        <p class="text-right">
+                            <strong>Taxed Amount:</strong>
+                            <span class="text-danger">
+                                <t t-esc="doc.taxed_amount"/>
+                            </span>
+                            INR
+                        </p>
                         <!-- Total Amount -->
                         <p class="text-right">
-                            <strong>Total Fees: </strong>
-                            <span class="text-danger"><t t-esc="total_fee"/></span> INR
+                            <strong>Total Amount:</strong>
+                            <span class="text-danger">
+                                <t t-esc="doc.final_total_amount"/>
+                            </span>
+                            INR
                         </p>
                     </div>
                 </t>

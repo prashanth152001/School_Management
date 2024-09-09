@@ -19,6 +19,7 @@
                 </header>
 
                 <sheet>
+                    <!-- smart buttons -->
                     <div class="oe_button_box" name="button_box">
                         <button name="action_open_student_suggestions" type="object" class="oe_stat_button"
                                 icon="fa-star" invisible="complaints_count == 0">
@@ -46,34 +47,53 @@
 
                     <!--    notebook for fee structure-->
                     <notebook>
-<!--                        fee structure page-->
+                        <!-- fee structure page-->
                         <page name="fees_structure" string="Fees Structure">
                             <field name="fees_structure_ids">
                                 <tree editable="bottom">
                                     <field name="name"/>
                                     <field name="amount"/>
-                                    <field name="due_date"/>
+                                    <field name="due_date" optional="show"/>
+                                    <field name="tax_ids" optional="show" widget="many2many_tags"/>
+                                    <field name="tax_amount" optional="show"/>
+                                    <field name="total_amount"/>
                                 </tree>
                                 <form>
                                     <group>
                                         <field name="name"/>
-                                        <field name="amount"/>
                                         <field name="due_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="amount"/>
+                                        <field name="tax_ids" widget="many2many_tags"/>
+                                        <field name="tax_amount"/>
+                                        <field name="total_amount"/>
                                     </group>
                                 </form>
                             </field>
                         </page>
-<!--                        additional info page-->
+                        <!-- additional info page-->
                         <page name="additional_info" string="Additional Info">
                             <form>
-                            <sheet>
-                                <group>
-                                    <field name="user_id"/>
-                                </group>
-                            </sheet>
+                                <sheet>
+                                    <group>
+                                        <field name="user_id"/>
+                                    </group>
+                                </sheet>
                             </form>
                         </page>
                     </notebook>
+
+                    <!-- final total amount with taxes-->
+                    <div class="o_form_field">
+                        <group class="float-end text-end">
+                            <field name="untaxed_amount"/>
+                            <field name="taxed_amount"/>
+                            <field name="final_total_amount"/>
+                        </group>
+                    </div>
+
+
                 </sheet>
 
                 <!--     chatter section-->

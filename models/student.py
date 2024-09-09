@@ -24,7 +24,10 @@ class StudentDetails(models.Model):
                                          string='Fees Structure')
     complaints_count = fields.Float(string='Complaints Count', compute='_compute_complaints_count')
     user_id = fields.Many2one(comodel_name='res.users', string='User')
-
+    # total fee amounts and tax amount calculation
+    final_total_amount = fields.Float(string='Total:', compute='_compute_total_amount', store=True, readonly=True)
+    untaxed_amount = fields.Float(string='Untaxed Amount:',compute='_compute_total_amount', store=True, readonly=True)
+    taxed_amount = fields.Float(string='Taxed Amount:', compute='_compute_total_amount', store=True, readonly=True)
 
     # computing student suggestions count
     def _compute_complaints_count(self):
@@ -40,7 +43,7 @@ class StudentDetails(models.Model):
             'res_model': 'student.complaint.wizard',
             'view_mode': 'form',
             'target': 'new',
-            'context':"{'default_name_id': active_id}"
+            'context': "{'default_name_id': active_id}"
         }
 
     # suggestions smart button
@@ -76,5 +79,18 @@ class StudentDetails(models.Model):
         if self.teacher_id:
             self.teacher_mob_num = self.teacher_id.mob_num
 
+    # computing total amounts
+    @api.onchange('fees_structure_ids')
+    def _compute_total_amount(self):
+        """Compute the total untaxed amount, taxed amount, and total amount from fees structures."""
+        for rec in self:
+            # Initialize the amounts to 0
+            rec.untaxed_amount = 0.0
+            rec.taxed_amount = 0.0
+            rec.final_total_amount = 0.0
 
-
+            # Sum the amounts from the fees_structure_ids recordset
+            for fee in rec.fees_structure_ids:
+                rec.untaxed_amount += fee.amount
+                rec.taxed_amount += fee.tax_amount
+                rec.final_total_amount += fee.total_amount
