@@ -11,6 +11,8 @@
     'data': ['security/school_security.xml',
              'security/ir.model.access.csv',
              'data/mail_template_student.xml',
+             'data/ir_cron_fee_due_mail.xml',
+             'data/mail_template_fee_due_remainder.xml',
              'wizard/student_complaint_view.xml',
              'views/student.xml',
              'views/teacher.xml',

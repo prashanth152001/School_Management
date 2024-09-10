@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="send_email_fee_due_cron" model="ir.cron">
+        <field name="name">Automatic Email: Fee Due Remainder</field>
+        <field name="model_id" ref="school.model_school_fees_structure"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_send_email()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+</odoo>

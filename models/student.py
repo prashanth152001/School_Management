@@ -22,8 +22,9 @@ class StudentDetails(models.Model):
     teacher_mob_num = fields.Char(string='Teacher No.')
     fees_structure_ids = fields.One2many(comodel_name='school.fees.structure', inverse_name='student_id',
                                          string='Fees Structure')
-    complaints_count = fields.Float(string='Complaints Count', compute='_compute_complaints_count')
+    complaints_count = fields.Float(string='Complaints Count', compute='_compute_complaints_count', store=True)
     user_id = fields.Many2one(comodel_name='res.users', string='User')
+
     # total fee amounts and tax amount calculation
     final_total_amount = fields.Float(string='Total:', compute='_compute_total_amount', store=True, readonly=True)
     untaxed_amount = fields.Float(string='Untaxed Amount:',compute='_compute_total_amount', store=True, readonly=True)
@@ -71,7 +72,7 @@ class StudentDetails(models.Model):
     # student email button action
     def action_student_email_button(self):
         template = self.env.ref('school.mail_template_student_creation')
-        template.send_mail(self.user_id)
+        template.send_mail(self.id)
 
     # automatically fetching teacher mobile no. when a teacher is selected
     @api.onchange('teacher_id')
