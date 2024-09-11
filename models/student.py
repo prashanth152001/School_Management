@@ -81,7 +81,7 @@ class StudentDetails(models.Model):
             self.teacher_mob_num = self.teacher_id.mob_num
 
     # computing total amounts
-    @api.onchange('fees_structure_ids')
+    @api.depends('fees_structure_ids')
     def _compute_total_amount(self):
         """Compute the total untaxed amount, taxed amount, and total amount from fees structures."""
         for rec in self:
@@ -95,3 +95,39 @@ class StudentDetails(models.Model):
                 rec.untaxed_amount += fee.amount
                 rec.taxed_amount += fee.tax_amount
                 rec.final_total_amount += fee.total_amount
+
+    # Full fee payment button
+    def full_payment_button(self):
+        # Collect invoice lines from fee structure
+        invoice_lines = []
+        for rec in self.fees_structure_ids:
+            invoice_lines.append((0, 0, {
+                'product_id': rec.fee_name_id.id,
+                'student_fee_id': rec.id,
+                'name': rec.fee_name_id.name,
+                'quantity': 1,
+                'price_unit': rec.amount,
+                'tax_ids': [(6, 0, rec.tax_ids.ids)],  # M2M relation needs this format
+                'price_subtotal': rec.amount,  # The amount before tax
+                'price_total': rec.total_amount,  # Total after applying taxes, if any
+            }))
+        # Invoice values
+        invoice_vals = {
+            'partner_id': self.user_id.partner_id.id,
+            'parent_name': self.guardian,
+            'parent_mobile': self.guardian_num,
+            'move_type': 'out_invoice',
+            'invoice_date': fields.Date.today(),
+            'invoice_line_ids': invoice_lines,  # Use the constructed list of lines
+        }
+        # Create invoice
+        invoice = self.env['account.move'].create(invoice_vals)
+        # Return action to open the created invoice
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Full Fee Invoice',
+            'view_mode': 'form',
+            'res_model': 'account.move',
+            'res_id': invoice.id,
+            'target': 'current',
+        }

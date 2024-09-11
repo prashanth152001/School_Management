@@ -6,36 +6,38 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <!-- Student Details -->
-                        <h2 class="text-center">Student Details</h2>
-                        <table class="table table-bordered table-hover table-sm">
+                        <h2 class="text-center" style="color: #007bff; margin-bottom: 20px; text-decoration: underline; font-weight: bold;">
+                            STUDENT DETAILS
+                        </h2>
+                        <table class="table" style="border: 1px solid #dee2e6; width: 100%;">
                             <tbody>
                                 <tr>
-                                    <th>Name:</th>
-                                    <td>
+                                    <th style="background-color: #f8f9fa; padding: 10px;">Name:</th>
+                                    <td style="padding: 10px;">
                                         <t t-esc="doc.name"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Class:</th>
-                                    <td>
+                                    <th style="background-color: #f8f9fa; padding: 10px;">Class:</th>
+                                    <td style="padding: 10px;">
                                         <t t-esc="doc.standard"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Section:</th>
-                                    <td>
+                                    <th style="background-color: #f8f9fa; padding: 10px;">Section:</th>
+                                    <td style="padding: 10px;">
                                         <t t-esc="doc.section"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Father's Name:</th>
-                                    <td>
+                                    <th style="background-color: #f8f9fa; padding: 10px;">Father's Name:</th>
+                                    <td style="padding: 10px;">
                                         <t t-esc="doc.guardian"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Email:</th>
-                                    <td>
+                                    <th style="background-color: #f8f9fa; padding: 10px;">Email:</th>
+                                    <td style="padding: 10px;">
                                         <t t-esc="doc.email_address"/>
                                     </td>
                                 </tr>
@@ -43,37 +45,40 @@
                         </table>
 
                         <br/>
+                        <hr/>
                         <br/>
 
                         <!-- Fee Structure Details -->
-                        <h3 class="text-center">Fee Structure</h3>
-                        <table class="table table-bordered table-hover table-sm mt-3">
-                            <thead class="thead-light">
+                        <h3 class="text-center" style="color: #28a745; margin-bottom: 20px; text-decoration: underline; font-weight: bold;">
+                            FEE DETAILS
+                        </h3>
+                        <table class="table" style="border: 2px solid #343a40; width: 100%; margin-top: 20px;">
+                            <thead style="background-color: #343a40; color: white;">
                                 <tr>
-                                    <th>Fee Description</th>
-                                    <th>Due Date</th>
-                                    <th>Untaxed Amount (INR)</th>
-                                    <th>Tax</th>
-                                    <th>Taxed Amount (INR)</th>
-                                    <th>Total Amount (INR)</th>
+                                    <th style="padding: 10px;">Fee Description</th>
+                                    <th style="padding: 10px;">Due Date</th>
+                                    <th style="padding: 10px; text-align: right;">Untaxed Amount (₹)</th>
+                                    <th style="padding: 10px;">Tax</th>
+                                    <th style="padding: 10px; text-align: right;">Taxed Amount (₹)</th>
+                                    <th style="padding: 10px; text-align: right;">Total Amount (₹)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr t-foreach="doc.fees_structure_ids" t-as="line">
-                                    <td t-esc="line.name"/>
-                                    <td>
+                                    <td style="padding: 10px;" t-esc="line.name"/>
+                                    <td style="padding: 10px;">
                                         <t t-esc="line.due_date" t-options='{"widget": "date"}'/>
                                     </td>
-                                    <td class="text-right">
+                                    <td style="padding: 10px; text-align: right;">
                                         <t t-esc="line.amount"/>
                                     </td>
-                                    <td>
+                                    <td style="padding: 10px;">
                                         <span t-field="line.tax_ids"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td style="padding: 10px; text-align: right;">
                                         <t t-esc="line.tax_amount"/>
                                     </td>
-                                    <td class="text-right">
+                                    <td style="padding: 10px; text-align: right;">
                                         <t t-esc="line.total_amount"/>
                                     </td>
                                 </tr>
@@ -81,31 +86,30 @@
                         </table>
 
                         <br/>
+                        <hr/>
+                        <br/>
 
-                        <!-- Total Untaxed Amount -->
-                        <p class="text-right">
-                            <strong>Untaxed Amount:</strong>
-                            <span class="text-danger">
-                                <t t-esc="doc.untaxed_amount"/>
-                            </span>
-                            INR
-                        </p>
-                        <!-- Total Taxed Amount -->
-                        <p class="text-right">
-                            <strong>Taxed Amount:</strong>
-                            <span class="text-danger">
-                                <t t-esc="doc.taxed_amount"/>
-                            </span>
-                            INR
-                        </p>
-                        <!-- Total Amount -->
-                        <p class="text-right">
-                            <strong>Total Amount:</strong>
-                            <span class="text-danger">
-                                <t t-esc="doc.final_total_amount"/>
-                            </span>
-                            INR
-                        </p>
+                        <!-- Total Section -->
+                        <div class="totals-section" style="text-align: right;">
+                            <p style="margin-right: 10px;">
+                                <strong>Untaxed Amount:</strong>
+                                <span style="color: #28a745; font-weight: bold;">
+                                    ₹<t t-esc="doc.untaxed_amount"/>
+                                </span>
+                            </p>
+                            <p style="margin-right: 10px;">
+                                <strong>Taxed Amount:</strong>
+                                <span style="color: #343a40; font-weight: bold;">
+                                    ₹<t t-esc="doc.taxed_amount"/>
+                                </span>
+                            </p>
+                            <p style="margin-right: 10px;">
+                                <strong>Total Amount:</strong>
+                                <span style="color: #dc3545; font-weight: bolder;">
+                                    ₹<t t-esc="doc.final_total_amount"/>
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </t>
             </t>
