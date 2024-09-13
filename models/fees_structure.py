@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.tools.populate import compute
 
 
 class FeesStructure(models.Model):
@@ -13,6 +14,11 @@ class FeesStructure(models.Model):
     tax_amount = fields.Float(string='Tax Amount', compute='_compute_tax_amount', store=True)
     total_amount = fields.Float(string='Total Amount', compute='_compute_tax_amount', store=True)
     student_id = fields.Many2one(comodel_name='school.student', string='Student')
+    payment_status = fields.Selection([('not_paid', 'Not Paid'), ('paid', 'Paid')],
+                                      string='Payment Status', default='not_paid',
+                                      compute='_compute_payment_status')
+    invoice_ids = fields.One2many(comodel_name='account.move', inverse_name='student_fee_id', string='Invoices')  # Link to related invoices
+    invoice_id = fields.Many2one(comodel_name='account.move')
 
     # Tax Amount computation
     @api.depends('amount', 'tax_ids')
@@ -65,6 +71,7 @@ class FeesStructure(models.Model):
             })],
         }
         invoice = self.env['account.move'].create(invoice_vals)
+        self.invoice_id = invoice.id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Fee Invoice',
@@ -73,3 +80,12 @@ class FeesStructure(models.Model):
             'res_id': invoice.id,
             'target': 'current',
         }
+
+    # Update payment status based on the invoice payment state
+    def _compute_payment_status(self):
+        for record in self:
+            if record.invoice_id and record.invoice_id.payment_state == 'paid':
+                record.payment_status = 'paid'
+            else:
+                record.payment_status = 'not_paid'
+

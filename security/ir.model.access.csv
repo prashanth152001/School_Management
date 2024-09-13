@@ -5,5 +5,6 @@ access_school_fees_structure,school.fees.structure,model_school_fees_structure,,
 access_school_parents,school.parents,model_school_parents,,1,1,1,1
 access_school_admission,school.admission,model_school_admission,,1,1,1,1
 access_student_complaint_wizard,student.complaint.wizard,model_student_complaint_wizard,,1,1,1,1
-access_student_complaint_management,student.complaint.management,model_student_complaint,school.group_school_management,1,1,0,1
-access_student_complaint_student,student.complaint.student,model_student_complaint,school.group_school_student,1,1,1,0
+access_student_complaint_management,student.complaint.management,model_student_complaint,school.group_school_management,1,1,1,1
+access_student_complaint_student,student.complaint.student,model_student_complaint,school.group_school_student,1,1,1,1
+access_product_brand,product.brand,model_product_brand,,1,1,1,1

@@ -6,7 +6,8 @@ class InvoiceUpgrade(models.Model):
 
     parent_name = fields.Char(string='Parent Name')
     parent_mobile = fields.Char(string='Parent Mobile No.')
-
+    # invoices for student fee payments tracking
+    student_fee_id = fields.Many2one(comodel_name='school.fees.structure', string='Student Fee')
 
 class InvoiceLinesUpgrade(models.Model):
     _inherit = 'account.move.line'

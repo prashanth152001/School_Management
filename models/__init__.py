@@ -6,3 +6,5 @@ from . import admission
 from . import sale
 from . import invoice
 from . import student_complaint
+from . import product
+from . import product_brand

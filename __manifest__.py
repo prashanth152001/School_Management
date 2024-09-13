@@ -20,9 +20,12 @@
              'views/admission.xml',
              'views/sale.xml',
              'views/invoice.xml',
+             'views/product.xml',
              'views/student_complaint.xml',
              'report/fee_structure_template.xml',
              'report/fee_structure_report.xml',
+             'report/sale_quotation_template.xml',
+             'report/sale_quotation_report.xml',
              ],
 
     'depends': ['mail',

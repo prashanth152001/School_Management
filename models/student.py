@@ -22,7 +22,7 @@ class StudentDetails(models.Model):
     teacher_mob_num = fields.Char(string='Teacher No.')
     fees_structure_ids = fields.One2many(comodel_name='school.fees.structure', inverse_name='student_id',
                                          string='Fees Structure')
-    complaints_count = fields.Float(string='Complaints Count', compute='_compute_complaints_count', store=True)
+    complaints_count = fields.Float(string='Complaints Count', compute='_compute_complaints_count')
     user_id = fields.Many2one(comodel_name='res.users', string='User')
 
     # total fee amounts and tax amount calculation
@@ -30,10 +30,13 @@ class StudentDetails(models.Model):
     untaxed_amount = fields.Float(string='Untaxed Amount:',compute='_compute_total_amount', store=True, readonly=True)
     taxed_amount = fields.Float(string='Taxed Amount:', compute='_compute_total_amount', store=True, readonly=True)
 
+    #invoice count
+    invoice_count = fields.Float(string='Invoice Count', compute='_compute_invoice_count')
+
     # computing student suggestions count
     def _compute_complaints_count(self):
         self.complaints_count = self.env['student.complaint'].search_count(
-            domain=[('name', '=', self.name)],
+            domain=[('name', '=', self.name)]
         )
 
     # student complaint wizard
@@ -131,3 +134,21 @@ class StudentDetails(models.Model):
             'res_id': invoice.id,
             'target': 'current',
         }
+
+    # computing invoice count
+    def _compute_invoice_count(self):
+        self.invoice_count = self.env['account.move'].search_count(
+            domain=[('partner_id', '=', self.user_id.partner_id.id), ('move_type', '=', 'out_invoice')],
+        )
+
+    # viewing fee invoices
+    def action_view_fee_invoice(self):
+        return {
+            'name': _('Invoices'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.move',
+            'view_mode': 'list,form',
+            'target': 'current',
+            'domain': [('partner_id', '=', self.user_id.partner_id.id), ('move_type', '=', 'out_invoice')],
+        }
+

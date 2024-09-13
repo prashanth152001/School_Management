@@ -26,6 +26,10 @@
                                 icon="fa-star" invisible="complaints_count == 0">
                             <field name="complaints_count" widget="statinfo" string="Suggestions"/>
                         </button>
+                        <button name="action_view_fee_invoice" type="object" class="oe_stat_button"
+                                icon="fa-pencil-square-o" invisible="invoice_count == 0">
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
                     </div>
                     <group>
                         <group>
@@ -52,19 +56,21 @@
                         <page name="fees_structure" string="Fees Structure">
                             <field name="fees_structure_ids">
                                 <tree editable="bottom">
-<!--                                    <field name="name"/>-->
+                                    <!--                                    <field name="name"/>-->
                                     <field name="fee_name_id"/>
                                     <field name="amount"/>
                                     <field name="due_date" optional="show"/>
                                     <field name="tax_ids" optional="show" widget="many2many_tags"/>
                                     <field name="tax_amount" optional="show"/>
                                     <field name="total_amount"/>
+                                    <field name="payment_status"/>
                                     <button string="Payment" name="fee_payment_button"
-                                            class="oe_highlight" type="object"/>
+                                            class="oe_highlight" type="object"
+                                            invisible="payment_status == 'paid'"/>
                                 </tree>
                                 <form>
                                     <group>
-<!--                                        <field name="name"/>-->
+                                        <!--                                        <field name="name"/>-->
                                         <field name="fee_name_id"/>
                                         <field name="due_date"/>
                                     </group>
