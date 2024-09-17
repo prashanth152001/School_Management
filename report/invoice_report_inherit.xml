@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="invoice_report_inherit" inherit_id="account.report_invoice_document">
+
+        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="after">
+            <p>This is a test paragraph to check XPath</p>
+        </xpath>
+
+        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="attributes">
+            <attribute name="class">text-center</attribute>
+        </xpath>
+
+        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="inside">
+            <p>This is a test paragraph to check XPath</p>
+        </xpath>
+
+        <xpath expr="//div[@class='mt-5 clearfix']//div//div[@id='informations']" position="replace">
+            <br/>
+            <div class="oe_structure">
+                <div class="row">
+                    <div class="col-6" name="bank_details">
+                        <table>
+                            <tr name="tr_bank_name">
+                                <td>
+                                    <strong>Bank Name</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.bank_name">Andhra Bank</span>
+                                </td>
+                            </tr>
+
+                            <tr name="tr_account_num">
+                                <td>
+                                    <strong>Account No.</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.account_number">0221465384684</span>
+                                </td>
+                            </tr>
+
+                            <tr name="tr_ifsc_code">
+                                <td>
+                                    <strong>IFSC Code</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.ifsc_code">ANDB987656</span>
+                                </td>
+                            </tr>
+
+                            <tr name="tr_branch_name">
+                                <td>
+                                    <strong>Branch</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.branch_name">Kukatpally</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-6 text-right" name="invoice_details">
+                        <table style="float: right;">
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.invoice_date" name="invoice_date">
+                                <td>
+                                    <t t-if="o.move_type == 'out_invoice'">
+                                        <strong>Invoice Date</strong>
+                                    </t>
+                                    <t t-elif="o.move_type == 'out_refund'">
+                                        <strong>Credit Note Date</strong>
+                                    </t>
+                                    <t t-elif="o.move_type == 'out_receipt'">
+                                        <strong>Receipt Date</strong>
+                                    </t>
+                                    <t t-else="">
+                                        <strong>Date</strong>
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.invoice_date">2023-09-12</span>
+                                </td>
+                            </tr>
+
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'"
+                                name="due_date">
+                                <td>
+                                    <strong>Due Date</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.invoice_date_due">2023-10-31</span>
+                                </td>
+                            </tr>
+
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.delivery_date" name="delivery_date">
+                                <td>
+                                    <strong>Delivery Date:</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.delivery_date">2023-09-25</span>
+                                </td>
+                            </tr>
+
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.invoice_origin" name="origin">
+                                <td>
+                                    <strong>Source:</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.invoice_origin">SO123</span>
+                                </td>
+                            </tr>
+
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.partner_id.ref" name="customer_code">
+                                <td>
+                                    <strong>Customer Code:</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.partner_id.ref"/>
+                                </td>
+                            </tr>
+
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.ref" name="reference">
+                                <td>
+                                    <strong>Reference:</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <span t-field="o.ref">INV/2023/00001</span>
+                                </td>
+                            </tr>
+
+                            <tr t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                                t-if="o.invoice_incoterm_id" name="incoterm_id">
+                                <td>
+                                    <strong>Incoterm:</strong>
+                                </td>
+                                <td>
+                                    <strong style="margin-left: 10px; margin-right: 10px;">:</strong>
+                                </td>
+                                <td>
+                                    <p t-if="o.incoterm_location">
+                                        <span t-field="o.invoice_incoterm_id.code"/>
+                                        <span t-field="o.incoterm_location"/>
+                                    </p>
+                                    <span t-else="" t-field="o.invoice_incoterm_id.code" class="m-0"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']" position="attributes">
+            <attribute name="class" remove="table-borderless" add="table-bordered" separator=" "/>
+            <attribute name="style" remove=""
+                       add="border: 2px solid #343a40; width: 100%; margin-top: 20px; border-collapse: collapse;"
+                       separator=" "/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//thead" position="attributes">
+            <attribute name="style" remove=""
+                       add="background-color: #343a40; color: white; border: 1px solid #6c757d;" separator=" "/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//th[@name='th_description']" position="before">
+            <th name="th_serial_num" class="text-end">
+                <span>Sl.</span>
+            </th>
+            <th name="th_product" class="text-start">
+                <span>Product</span>
+            </th>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//th[@name='th_subtotal']" position="after">
+            <th name="th_total" class="text-end">
+                <span>Total Amount</span>
+            </th>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//tbody//t[@t-set='current_total']" position="after">
+            <t t-set="number_of_lines" t-value="0"/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//tbody//tr" position="before">
+            <t t-set="number_of_lines" t-value="number_of_lines + 1"/>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//tbody//tr//td[@name='account_invoice_line_name']"
+               position="before">
+            <td name="td_serial_num">
+                <span t-esc="number_of_lines">0</span>
+            </td>
+            <td name="td_product_id" t-options="{'widget': 'text'}">
+                <span t-field="line.product_id.name">Sofa</span>
+            </td>
+        </xpath>
+
+        <xpath expr="//table[@name='invoice_line_table']//tbody//tr//td[@name='td_subtotal']" position="after">
+            <td name="td_total" class="text-end o_price_total">
+                <span class="text-nowrap" t-field="line.price_total">89.00</span>
+            </td>
+        </xpath>
+
+        <xpath expr="//div[@id='right-elements']//table" position="attributes">
+            <attribute name="class" remove="table-borderless" add="table-bordered" separator=" "/>
+            <attribute name="style" remove=""
+                       add="border: 2px solid #343a40; width: 100%; margin-top: 20px; border-collapse: collapse;"
+                       separator=" "/>
+        </xpath>
+
+    </template>
+
+</odoo>

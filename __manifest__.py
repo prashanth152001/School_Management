@@ -26,6 +26,7 @@
              'report/fee_structure_report.xml',
              'report/sale_quotation_template.xml',
              'report/sale_quotation_report.xml',
+             'report/invoice_report_inherit.xml',
              ],
 
     'depends': ['mail',
