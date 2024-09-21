@@ -3,16 +3,17 @@
 
     <template id="invoice_report_inherit" inherit_id="account.report_invoice_document">
 
-        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="after">
-            <p>This is a test paragraph to check XPath</p>
-        </xpath>
+<!--        <xpath expr="//div[hasclass('page')]//h2//span" position="attributes">-->
+<!--            <attribute name="style" remove="text-align: left;" add="text-align: center;" separator=" "/>-->
+<!--        </xpath>-->
 
-        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="attributes">
-            <attribute name="class">text-center</attribute>
-        </xpath>
+<!--        <xpath expr="//div[hasclass('mt-5') and hasclass('clearfix')]//div[hasclass('page') and hasclass('mb-4')]//h2" position="attributes">-->
+<!--            <attribute name="class" remove="" add="col-8" separator=" "/>-->
+<!--        </xpath>-->
 
-        <xpath expr="//div[@class='mt-5 clearfix']//div[@class='page mb-4']//h2" position="inside">
-            <p>This is a test paragraph to check XPath</p>
+        <xpath expr="//div[@class='mt-5 clearfix']/div[@class='page mb-4']/h2" position="attributes">
+            <attribute name="style">text-align: center; color: red;</attribute>
+            <attribute name="class">text-center text-primary</attribute>
         </xpath>
 
         <xpath expr="//div[@class='mt-5 clearfix']//div//div[@id='informations']" position="replace">

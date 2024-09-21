@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_purchase_form_banking_details" model="ir.ui.view">
+        <field name="name">view.purchase.form.banking.details</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Adding bank details in Other Info page -->
+            <xpath expr="//page[@name='purchase_delivery_invoice']//group//group[@name='invoice_info']"
+                   position="after">
+                <group name="banking_info_group" string="Banking">
+                    <field name="bank_name"/>
+                    <field name="account_name"/>
+                    <field name="account_number"/>
+                    <field name="iban_number"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

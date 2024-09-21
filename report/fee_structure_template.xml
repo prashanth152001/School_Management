@@ -65,7 +65,7 @@
                             </thead>
                             <tbody>
                                 <tr t-foreach="doc.fees_structure_ids" t-as="line">
-                                    <td style="padding: 10px;" t-esc="line.fee_name_id.name"/>
+                                    <td style="padding: 10px;" t-esc="line.fee_name_id"/>
                                     <td style="padding: 10px;">
                                         <t t-esc="line.due_date" t-options='{"widget": "date"}'/>
                                     </td>
