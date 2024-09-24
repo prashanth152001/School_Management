@@ -50,7 +50,7 @@
                                                             <br/>
                                                             <br/>
                                                             This is to inform you that, your child <t t-out="object.student_id.name or ''"/>,
-                                                            <t t-out="object.name or ''"/> fee of amount Rs.<t t-out="object.total_amount or ''"/> is due.
+                                                            <t t-out="object.fee_name_id.name or ''"/> fee of amount Rs.<t t-out="object.total_amount or ''"/> is due.
                                                             <br/>
                                                             Kindly clear the fee due by today!
                                                             <br/>

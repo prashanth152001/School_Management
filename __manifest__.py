@@ -30,13 +30,14 @@
              'report/invoice_report_inherit.xml',
              'report/purchase_order_template.xml',
              'report/purchase_order_report.xml',
+             'report/purchase_order_report_xlsx.xml',
              ],
 
     'depends': ['mail',
                 'sale',
                 'account',
                 'purchase',
-                'base',
+                'report_xlsx',
                 ],
 
     'installable': True,
