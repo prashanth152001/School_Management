@@ -24,6 +24,7 @@ class StudentDetails(models.Model):
                                          string='Fees Structure')
     complaints_count = fields.Float(string='Complaints Count', compute='_compute_complaints_count')
     user_id = fields.Many2one(comodel_name='res.users', string='User')
+    student_image = fields.Image(string='Student Image')
 
     # total fee amounts and tax amount calculation
     final_total_amount = fields.Float(string='Total:', compute='_compute_total_amount', store=True, readonly=True)

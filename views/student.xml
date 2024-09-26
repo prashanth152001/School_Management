@@ -31,6 +31,7 @@
                             <field name="invoice_count" widget="statinfo" string="Invoices"/>
                         </button>
                     </div>
+                    <field name="student_image" widget="image" class="oe_avatar" options="{&quot;student_image&quot;: &quot;avatar_128&quot;}"/>
                     <group>
                         <group>
                             <field name="name"/>
@@ -56,7 +57,7 @@
                         <page name="fees_structure" string="Fees Structure">
                             <field name="fees_structure_ids">
                                 <tree editable="bottom">
-                                    <!--                                    <field name="name"/>-->
+                                    <!-- <field name="name"/> -->
                                     <field name="fee_name_id"/>
                                     <field name="amount"/>
                                     <field name="due_date" optional="show"/>
@@ -70,7 +71,7 @@
                                 </tree>
                                 <form>
                                     <group>
-                                        <!--                                        <field name="name"/>-->
+                                        <!--<field name="name"/>-->
                                         <field name="fee_name_id"/>
                                         <field name="due_date"/>
                                     </group>
@@ -137,28 +138,100 @@
         </field>
     </record>
 
+    <!-- quick create student form in kanban view -->
+    <record id="quick_create_school_student_form_view" model="ir.ui.view">
+        <field name="name">school.student.quick_create.form</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" class="o_field_highlight" string='Name'/>
+                    <field name="dob" string="Date of Birth"/>
+                    <field name="standard" placeholder="e.g. 'student class'" string="Class"/>
+                    <field name="email_address" string="Email" placeholder='e.g. "email@address.com"' />
+                    <field name="guardian" string="Parent" placeholder='e.g. "Subramanyam"' />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- kanban view for students -->
+    <record id="school_student_kanban_view" model="ir.ui.view">
+        <field name="name">school.student.kanban</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="select_status" default_order="select_status desc" class="o_kanban_small_column o_opportunity_kanban"
+                    on_create="quick_create" quick_create_view="school.quick_create_school_student_form_view"
+                    archivable="false" sample="1">
+                <field name="select_status"/>
+                <field name="student_image"/>
+                <field name="name"/>
+                <field name="dob"/>
+                <field name="standard"/>
+                <progressbar field="section" colors="{&quot;A&quot;: &quot;success&quot;, &quot;B&quot;: &quot;warning&quot;, &quot;C&quot;: &quot;danger&quot;}"/>
+                <templates>
+                    <t t-name="kanban-menu">
+                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                        <ul class="oe_kanban_colorpicker" data-field="standard"/>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img alt="Avatar" t-att-src="kanban_image('school.student', 'student_image', record.id.raw_value)"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li class="mb4">
+                                        <strong><field name="name"/></strong>
+                                    </li>
+                                    <li>
+                                        <field name="dob"/>
+                                    </li>
+                                    <li>
+                                        <field name="standard"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
 
     <!--    calendar view for students-->
     <record id="school_student_calendar_view" model="ir.ui.view">
         <field name="name">school.student.calendar</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
-            <calendar string="Student details" create="0" mode="month" date_start="doj" event_limit="5"
-                      quick_create="0">
-                <field name="name" avatar_field="avatar_128" options="{'icon': 'fa fa-users'}"/>
+            <calendar string="Student details" create="0" mode="month" date_start="doj" quick_create="0" color="name">
+                <field name="name"/>
+                <field name="dob"/>
             </calendar>
         </field>
     </record>
 
+    <!-- pivot view for students -->
+    <record id="school_student_pivot_view" model="ir.ui.view">
+        <field name="name">school.student.pivot</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <pivot string="Students">
+                <field name="name" type="row"/>
+                <field name="doj" type="col" interval="month"/>
+            </pivot>
+        </field>
+    </record>
 
     <!--    graph view for students-->
     <record id="school_student_graph_view" model="ir.ui.view">
         <field name="name">school.student.graph</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
-            <graph string="Student details" sample="1">
+            <graph string="Student details" sample="1" type="pie">
                 <field name="name"/>
-                <field name="standard" type="measure"/>
+                <field name="final_total_amount" type="measure"/>
             </graph>
         </field>
     </record>
@@ -169,7 +242,7 @@
         <field name="name">Student Records</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">school.student</field>
-        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="view_mode">kanban,tree,form,calendar,pivot,graph</field>
     </record>
 
     <!--student menu-->
