@@ -336,7 +336,7 @@
                         <h3 style="font-weight: bold;">GENERAL TERMS AND CONDITIONS</h3>
 
 
-                        <p t-field="doc.notes" class="mt-4">Write the terms and conditions here</p>
+                        <p t-field="doc.user_id.payment_terms" class="mt-4">Write the terms and conditions here</p>
 
                         <br/>
                         <br/>

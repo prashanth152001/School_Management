@@ -23,6 +23,7 @@
              'views/product.xml',
              'views/purchase.xml',
              'views/student_complaint.xml',
+             'views/res_users.xml',
              'report/fee_structure_template.xml',
              'report/fee_structure_report.xml',
              'report/sale_quotation_template.xml',
@@ -38,6 +39,7 @@
                 'account',
                 'purchase',
                 'report_xlsx',
+                'base',
                 ],
 
     'installable': True,
