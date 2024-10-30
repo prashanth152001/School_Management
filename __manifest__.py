@@ -35,7 +35,7 @@
              ],
 
     'depends': ['mail',
-                'sale',
+                'sale_management',
                 'account',
                 'purchase',
                 'report_xlsx',

@@ -19,3 +19,4 @@ class InvoiceLinesUpgrade(models.Model):
     _inherit = 'account.move.line'
 
     student_fee_id = fields.Many2one(comodel_name='school.fees.structure',string='Student Fee')
+    brand_id = fields.Many2one(comodel_name='product.brand', string='Product Brand')
